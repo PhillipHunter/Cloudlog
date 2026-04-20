@@ -40,12 +40,10 @@ $config['display_freq'] = true;
 |
 | 	'qrz_username'	QRZ.com user login
 |	'qrz_password'	QRZ.com user password
-|	'use_fullname'  Get full names from QRZ, may not be GDPR compliant
 */
 
 $config['qrz_username'] = "";
 $config['qrz_password'] = "";
-$config['use_fullname'] = false;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +55,18 @@ $config['use_fullname'] = false;
 */
 $config['hamqth_username'] = "";
 $config['hamqth_password'] = "";
+
+/*
+|--------------------------------------------------------------------------
+| Callbook Options
+|--------------------------------------------------------------------------
+|
+| 'use_fullname'  When true, callbook lookups (QRZ and HamQTH) return the
+|                 operator's full name instead of just the first name or
+|                 nickname. May not be GDPR compliant in some jurisdictions.
+*/
+
+$config['use_fullname'] = false;
 
 /*
 |--------------------------------------------------------------------------
