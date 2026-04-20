@@ -75,7 +75,8 @@ class Hamqth {
 
             // Return Required Fields
             $data['callsign'] = (string)$xml->search->callsign;
-            $data['name'] = (string)$xml->search->nick;
+            $adr_name = (string)$xml->search->adr_name;
+            $data['name'] = $adr_name !== '' ? $adr_name : (string)$xml->search->nick;
             $data['gridsquare'] = (string)$xml->search->grid;
             $data['city'] = (string)$xml->search->adr_city;
             $data['lat'] = (string)$xml->search->latitude;
