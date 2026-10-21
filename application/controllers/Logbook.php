@@ -1003,13 +1003,13 @@ class Logbook extends CI_Controller
 					$this->session->set_userdata('hamqth_session_key', $hamqth_session_key);
 				}
 
-				$callsign['callsign'] = $this->hamqth->search($id, $this->session->userdata('hamqth_session_key'));
+				$callsign['callsign'] = $this->hamqth->search($id, $this->session->userdata('hamqth_session_key'), $this->config->item('use_fullname'));
 
 				// If HamQTH session has expired, start a new session and retry the search.
 				if ($callsign['callsign']['error'] == "Session does not exist or expired") {
 					$hamqth_session_key = $this->hamqth->session($this->session->userdata('callbook_username'), $decrypted_password);
 					$this->session->set_userdata('hamqth_session_key', $hamqth_session_key);
-					$callsign['callsign'] = $this->hamqth->search($callsign, $this->session->userdata('hamqth_session_key'));
+					$callsign['callsign'] = $this->hamqth->search($callsign, $this->session->userdata('hamqth_session_key'), $this->config->item('use_fullname'));
 				}
 				if (isset($data['callsign']['gridsquare'])) {
 					$this->load->model('logbook_model');
@@ -1143,13 +1143,13 @@ class Logbook extends CI_Controller
 				$this->session->set_userdata('hamqth_session_key', $hamqth_session_key);
 			}
 
-			$data['callsign'] = $this->hamqth->search($plainCall, $this->session->userdata('hamqth_session_key'));
+			$data['callsign'] = $this->hamqth->search($plainCall, $this->session->userdata('hamqth_session_key'), $this->config->item('use_fullname'));
 
 			// If HamQTH session has expired, start a new session and retry the search.
 			if ($data['callsign']['error'] == "Session does not exist or expired") {
 				$hamqth_session_key = $this->hamqth->session($this->session->userdata('callbook_username'), $decrypted_password);
 				$this->session->set_userdata('hamqth_session_key', $hamqth_session_key);
-				$data['callsign'] = $this->hamqth->search($plainCall, $this->session->userdata('hamqth_session_key'));
+				$data['callsign'] = $this->hamqth->search($plainCall, $this->session->userdata('hamqth_session_key'), $this->config->item('use_fullname'));
 			}
 			if (isset($data['callsign']['gridsquare'])) {
 				$this->load->model('logbook_model');

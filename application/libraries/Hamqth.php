@@ -43,7 +43,7 @@ class Hamqth {
 	}
 
 
-	public function search($callsign, $key)
+	public function search($callsign, $key, $use_fullname = false)
 	{
 		$xml_feed_url = 'https://www.hamqth.com/xml.php?id=' . $key . '&callsign=' . $callsign . '&prg=cloudlog';
 		$xml_raw = $this->fetch($xml_feed_url);
@@ -62,7 +62,12 @@ class Hamqth {
 		// Return Required Fields
 		$data = array();
 		$data['callsign'] = (string)$xml->search->callsign;
-		$data['name'] = (string)$xml->search->nick;
+		if ($use_fullname === true) {
+			$adr_name = (string)$xml->search->adr_name;
+			$data['name'] = $adr_name !== '' ? $adr_name : (string)$xml->search->nick;
+		} else {
+			$data['name'] = (string)$xml->search->nick;
+		}
 		$data['gridsquare'] = (string)$xml->search->grid;
 		$data['city'] = (string)$xml->search->adr_city;
 		$data['lat'] = (string)$xml->search->latitude;
